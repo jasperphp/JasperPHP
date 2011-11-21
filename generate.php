@@ -18,7 +18,7 @@
 
  */
 
-require_once("http://localhost:8081/JavaBridge/java/Java.inc");
+require_once("http://localhost:8080/JavaBridge/java/Java.inc");
 
 try {
 
