@@ -1,0 +1,9 @@
+how to configure this report..
+
+1. download PHP/Java Bridge(http://php-java-bridge.sourceforge.net/).
+2. deploy the Java Bridge on tomcat Server.
+3. copy the jar jasper lib and mysql connector j lib in tomcat lib
+4. restart tomcat server
+5. edit php.ini(allow_url_include = On);
+6. restart apache httpd server
+7. include path of the library in php file
