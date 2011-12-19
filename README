@@ -6,4 +6,8 @@ how to configure this report..
 4. restart tomcat server
 5. edit php.ini(allow_url_include = On);
 6. restart apache httpd server
+<<<<<<< HEAD
 7. include path of the library in php file
+=======
+7. include path of the library in php file
+>>>>>>> f68c0919dd932a3e14f279c116df7a33f518398b
