@@ -72,13 +72,13 @@ case 'csv':
     $outputPath = realpath(".")."\\"."output.csv";
 
     try {
-        $exporter = new java("net.sf.jasperreports.engine.export.JRCsvExporter");
-        $exporter->setParameter(java("net.sf.jasperreports.engine.export.JRCsvExporterParameter")->FIELD_DELIMITER,",");
-        $exporter->setParameter(java("net.sf.jasperreports.engine.export.JRCsvExporterParameter")->RECORD_DELIMITER,"\n");
-        $exporter->setParameter(java("net.sf.jasperreports.engine.export.JRCsvExporterParameter")->CHARACTER_ENCODING,"UTF-8");
-        $exporter->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint );
-        $exporter->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
-        $exporter->exportReport();
+        $exporterCSV = new java("net.sf.jasperreports.engine.export.JRCsvExporter");
+        $exporterCSV->setParameter(java("net.sf.jasperreports.engine.export.JRCsvExporterParameter")->FIELD_DELIMITER,",");
+        $exporterCSV->setParameter(java("net.sf.jasperreports.engine.export.JRCsvExporterParameter")->RECORD_DELIMITER,"\n");
+        $exporterCSV->setParameter(java("net.sf.jasperreports.engine.export.JRCsvExporterParameter")->CHARACTER_ENCODING,"UTF-8");
+        $exporterCSV->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint );
+        $exporterCSV->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
+        $exporterCSV->exportReport();
     } catch (JavaException $ex) {
       echo $ex;
     }
@@ -90,10 +90,10 @@ case 'docx':
     $outputPath = realpath(".")."\\"."output.docx";
 
     try {
-        $exporter = new java("net.sf.jasperreports.engine.export.ooxml.JRDocxExporter");
-        $exporter->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint );
-        $exporter->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
-        $exporter->exportReport();
+        $exporterDOCX = new java("net.sf.jasperreports.engine.export.ooxml.JRDocxExporter");
+        $exporterDOCX->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint );
+        $exporterDOCX->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
+        $exporterDOCX->exportReport();
 
     } catch (JavaException $ex) {
       echo $ex;
@@ -106,10 +106,10 @@ case 'html':
     $outputPath = realpath(".")."\\"."output.html";
 
     try {
-        $exporter = new java("net.sf.jasperreports.engine.export.JRHtmlExporter");
-        $exporter->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint );
-        $exporter->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
-        $exporter->exportReport();
+        $exporterHTML = new java("net.sf.jasperreports.engine.export.JRHtmlExporter");
+        $exporterHTML->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint );
+        $exporterHTML->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
+        $exporterHTML->exportReport();
 
     } catch (JavaException $ex) {
       echo $ex;
@@ -118,8 +118,8 @@ break;
 case 'pdf':
     $outputPath = realpath(".")."\\"."output.pdf";
 
-    $exportManager = new JavaClass("net.sf.jasperreports.engine.JasperExportManager");
-    $exportManager->exportReportToPdfFile($jasperPrint, $outputPath);
+    $exportManagerPDF = new JavaClass("net.sf.jasperreports.engine.JasperExportManager");
+    $exportManagerPDF->exportReportToPdfFile($jasperPrint, $outputPath);
 
     header("Content-type: application/pdf");
 break;
@@ -127,10 +127,10 @@ case 'ods':
     $outputPath = realpath(".")."\\"."output.ods";
 
     try {
-        $exporter = new java("net.sf.jasperreports.engine.export.oasis.JROdsExporter");
-        $exporter->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint );
-        $exporter->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
-        $exporter->exportReport();
+        $exporterODS = new java("net.sf.jasperreports.engine.export.oasis.JROdsExporter");
+        $exporterODS->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint );
+        $exporterODS->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
+        $exporterODS->exportReport();
 
     } catch (JavaException $ex) {
       echo $ex;
@@ -143,10 +143,10 @@ case 'odt':
     $outputPath = realpath(".")."\\"."output.odt";
 
     try {
-        $exporter = new java("net.sf.jasperreports.engine.export.oasis.JROdtExporter");
-        $exporter->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint );
-        $exporter->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
-        $exporter->exportReport();
+        $exporterODT = new java("net.sf.jasperreports.engine.export.oasis.JROdtExporter");
+        $exporterODT->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint );
+        $exporterODT->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
+        $exporterODT->exportReport();
 
     } catch (JavaException $ex) {
       echo $ex;
@@ -159,11 +159,11 @@ case 'txt':
     $outputPath = realpath(".")."\\"."output.txt";
 
     try {
-        $exporter = new java("net.sf.jasperreports.engine.export.JRTextExporter");
-        $exporter->setParameter(java("net.sf.jasperreports.engine.export.JRTextExporterParameter")->PAGE_WIDTH,120);
-        $exporter->setParameter(java("net.sf.jasperreports.engine.export.JRTextExporterParameter")->PAGE_HEIGHT,60);
-        $exporter->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint );
-        $exporter->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
+        $exporterTXT = new java("net.sf.jasperreports.engine.export.JRTextExporter");
+        $exporterTXT->setParameter(java("net.sf.jasperreports.engine.export.JRTextExporterParameter")->PAGE_WIDTH,120);
+        $exporterTXT->setParameter(java("net.sf.jasperreports.engine.export.JRTextExporterParameter")->PAGE_HEIGHT,60);
+        $exporterTXT->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint );
+        $exporterTXT->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
         $exporter->exportReport();
 
     } catch (JavaException $ex) {
