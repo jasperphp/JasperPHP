@@ -32,6 +32,7 @@
 	<option value="ods">ODS</option>
 	<option value="odt">ODT</option>
 	<option value="txt">TXT</option>
+        <option value="rtf">RTF</option>
 </select>
 <br /><br />
 	<input type="submit" value="Generate"/>
