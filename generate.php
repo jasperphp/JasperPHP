@@ -194,7 +194,7 @@ switch ($_POST['format']) {
         }
 
         header("Content-type: aapplication/vnd.ms-powerpoint");
-        header("Content-Disposition: attachment; filename={$this->filename}.pptx");
+        header("Content-Disposition: attachment; filename=output.pptx");
       break;
     
 }
