@@ -182,6 +182,21 @@ switch ($_POST['format']) {
         header("Content-type: application/rtf");
         header("Content-Disposition: attachment; filename=output.rtf");
         break;
+    case 'pptx':
+         $outputPath = realpath(".") . "\\" . "output.pptx";
+
+        try {
+            $exporter = new java("net.sf.jasperreports.engine.export.ooxml.JRPptxExporter");
+            $exporter->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint);
+            $exporter->setParameter(java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
+        } catch (JavaException $ex) {
+            echo $ex;
+        }
+
+        header("Content-type: aapplication/vnd.ms-powerpoint");
+        header("Content-Disposition: attachment; filename={$this->filename}.pptx");
+      break;
+    
 }
 $exporter->exportReport();
         
