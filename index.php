@@ -33,6 +33,7 @@
 	<option value="odt">ODT</option>
 	<option value="txt">TXT</option>
         <option value="rtf">RTF</option>
+        <option value="pptx">PPTX</option>
 </select>
 <br /><br />
 	<input type="submit" value="Generate"/>
