@@ -263,7 +263,7 @@ class Jreport {
         unlink($outputPath);
     }
 
-    static function convertValue($value, $className) {
+static function convertValue($value, $className) {
         // if we are a string, just use the normal conversion  
         // methods from the java extension...  
         //Revisar http://byte-consult.be/2008/08/16/phpjava-bridge-jasperreports/
@@ -319,5 +319,4 @@ class Jreport {
         }
         return $arrayList;
     }
-    
 }
