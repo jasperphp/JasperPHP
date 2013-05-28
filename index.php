@@ -1,4 +1,5 @@
 <?php
+include_once 'generate.php';
 /*
   This file is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -14,14 +15,27 @@
   along with This file.  If not, see <http://www.gnu.org/licenses/>.
 
   tsuyu
+  and refactored by FraGoTe (fgonzalestello91@gmail.com)
  */
+
+if(count($_REQUEST)>0){
+    
+    $query = "SELECT customer.first_name AS customer_first_name,
+                                customer.last_name AS customer_last_name,
+                                customer.email AS customer_email
+                         FROM  customer customer";
+    
+    $obJrepor = new Jreport($query, 'customer.jrxml', array('title'=>'Customer'), 'report');
+    $obJrepor->exportar($_REQUEST['format']);
+}
+
 ?>
 <html>
 <head>
 <title>Jasper Report Example</title>
 </head>
 <body>
-<form name="form_jasper" method="post" action="generate.php">
+<form name="form_jasper" method="post" action="#">
 <select name="format">
     <option value="">Select</option>
 	<option value="xls">XLS</option>
