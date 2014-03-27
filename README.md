@@ -1,3 +1,10 @@
+JasperPHP
+========
+This a PHP library based on JasperReports library that let you create reports with a graphical tool (We recommend to use iReport).
+
+Once you finish your report with iReport you'll have a file with extension jrxml, using this library you will export this jrxml to PDF, XLS, DOC, DOCX, PPTX, CSV, HTML, ODS, ODT, TXT, RTF and we are working to let the library export to SWF.
+
+
 How to configure JasperPHP
 =====================================
 
