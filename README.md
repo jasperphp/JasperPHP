@@ -1,4 +1,4 @@
-JASPERPHP
+JasperPHP
 ========
 This a PHP library based on JasperReports library that let you create reports with a graphical tool (We recommend to use iReport).
 
