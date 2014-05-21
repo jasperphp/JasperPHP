@@ -28,14 +28,22 @@ class Jreport {
     var $parametros;
 
     function __construct($query, $jrxmlName, $parameters, $filename = "report") {
-        if (!empty($query))
+        if (!empty($query)) {
             $this->query = $query;
-        if (!empty($jrxmlName))
+        }
+        
+        if (!empty($jrxmlName)) {
             $this->jrxmlName = $jrxmlName;
-        if (!empty($filename))
+        }
+        
+        if (!empty($filename)) {
             $this->filename = $filename;
-        if (!empty($parameters))
+        }
+        
+        if (!empty($parameters)) {
             $this->parametros = $parameters;
+        }
+        
         $this->connect();
     }
 
