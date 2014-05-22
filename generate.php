@@ -78,9 +78,11 @@ class Jreport {
         $params = new Java("java.util.HashMap");
         $params->put("REPORT_LOCALE", $this->convertValue("en_US", "java.util.Locale"));
 
-        if (!empty($this->parametros))
-            foreach ($this->parametros as $key => $value)
+        if (!empty($this->parametros)) {
+            foreach ($this->parametros as $key => $value) {
                 $params->put($key, $value);
+            }
+        }
 
         $class = new JavaClass("java.lang.Class");
         $class->forName("com.mysql.jdbc.Driver");
