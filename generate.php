@@ -62,8 +62,9 @@ class Jreport {
             $compileManager = new JavaClass("net.sf.jasperreports.engine.JasperCompileManager");
             $report = $compileManager->compileReport($jasperDesign);
         } catch (JavaException $ex) {
-                echo $ex;
+            echo $ex;
         }
+        
         return $report;
     }
 
@@ -93,6 +94,7 @@ class Jreport {
         } catch (JavaException $ex) {
                 echo $ex->getCause();
         }
+        
         $this->jasperPrint = $jasperPrint;
     }
 
@@ -267,6 +269,7 @@ class Jreport {
               break;
              */
         }
+        
         $exporter->exportReport();
 
         readfile($outputPath);
@@ -314,6 +317,7 @@ static function convertValue($value, $className) {
 
         echo ( 'unable to convert value, class name ' . $className .
         ' not recognised');
+        
         return false;
     }
 
@@ -327,6 +331,7 @@ static function convertValue($value, $className) {
         foreach( $ar_data as $value ) {
           $arrayList->add( $value );
         }
+        
         return $arrayList;
     }
 }
