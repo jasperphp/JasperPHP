@@ -28,17 +28,24 @@ class Jreport
     var $filename;
     var $parametros;
 
-    function __construct($query, $jrxmlName, $parameters, $filename = "report") 
-    {
-        if (!empty($query))
+    function __construct($query, $jrxmlName, $parameters, $filename = "report") {
+        if (!empty($query)) {
             $this->query = $query;
-        if (!empty($jrxmlName))
+        }
+        
+        if (!empty($jrxmlName)) {
             $this->jrxmlName = $jrxmlName;
-        if (!empty($filename))
+        }
+        
+        if (!empty($filename)) {
             $this->filename = $filename;
-        if (!empty($parameters))
+        }
+        
+        if (!empty($parameters)) {
             $this->parametros = $parameters;
-        $this->connect();
+        }
+    
+   	$this->connect();
     }
 
     function compileReporte() 
@@ -57,8 +64,9 @@ class Jreport
             $compileManager = new JavaClass("net.sf.jasperreports.engine.JasperCompileManager");
             $report = $compileManager->compileReport($jasperDesign);
         } catch (JavaException $ex) {
-                echo $ex;
+            echo $ex;
         }
+        
         return $report;
     }
 
@@ -74,9 +82,11 @@ class Jreport
         $params = new Java("java.util.HashMap");
         $params->put("REPORT_LOCALE", $this->convertValue("en_US", "java.util.Locale"));
 
-        if (!empty($this->parametros))
-            foreach ($this->parametros as $key => $value)
+        if (!empty($this->parametros)) {
+            foreach ($this->parametros as $key => $value) {
                 $params->put($key, $value);
+            }
+        }
 
         $class = new JavaClass("java.lang.Class");
         $class->forName("com.mysql.jdbc.Driver");
@@ -87,6 +97,7 @@ class Jreport
         } catch (JavaException $ex) {
                 echo $ex->getCause();
         }
+        
         $this->jasperPrint = $jasperPrint;
     }
 
@@ -262,6 +273,7 @@ class Jreport
               break;
              */
         }
+        
         $exporter->exportReport();
 
         readfile($outputPath);
@@ -303,13 +315,13 @@ class Jreport
         } catch (Exception $err) {
             echo ( 'unable to convert value, ' . $value .
             ' could not be converted to ' . $className . ' ');
-            //' could not be converted to ' . $className . ' ' . $err);  
-
+            //' could not be converted to ' . $className . ' ' . $err); 
             return false;
         }
 
         echo ( 'unable to convert value, class name ' . $className .
         ' not recognised');
+        
         return false;
     }
 
@@ -325,6 +337,7 @@ class Jreport
         foreach( $ar_data as $value ) {
           $arrayList->add( $value );
         }
+        
         return $arrayList;
     }
 }
