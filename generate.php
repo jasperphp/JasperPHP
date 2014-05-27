@@ -19,7 +19,8 @@
 
 require_once("http://localhost:8080/JavaBridge/java/Java.inc");
 
-class Jreport {
+class Jreport 
+{
 
     var $query;
     var $jrxmlName;
@@ -27,7 +28,8 @@ class Jreport {
     var $filename;
     var $parametros;
 
-    function __construct($query, $jrxmlName, $parameters, $filename = "report") {
+    function __construct($query, $jrxmlName, $parameters, $filename = "report") 
+    {
         if (!empty($query))
             $this->query = $query;
         if (!empty($jrxmlName))
@@ -39,7 +41,8 @@ class Jreport {
         $this->connect();
     }
 
-    function compileReporte() {
+    function compileReporte() 
+    {
         $ruta = "reports/" . $this->jrxmlName;
         $consulta = $this->query;
         try {
@@ -59,7 +62,8 @@ class Jreport {
         return $report;
     }
 
-    function connect() {
+    function connect() 
+    {
         //db username and password
         $host = 'localhost:3306';
         $dbname = 'zakila';
@@ -86,7 +90,8 @@ class Jreport {
         $this->jasperPrint = $jasperPrint;
     }
 
-    function exportar($typeoffile) {
+    function exportar($typeoffile) 
+    {
         $jasperPrint = $this->jasperPrint;
         $exporter = new java("net.sf.jasperreports.engine.JRExporter");
         set_time_limit(0);
@@ -263,7 +268,8 @@ class Jreport {
         unlink($outputPath);
     }
 
-static function convertValue($value, $className) {
+    static function convertValue($value, $className) 
+    {
         // if we are a string, just use the normal conversion  
         // methods from the java extension...  
         //Revisar http://byte-consult.be/2008/08/16/phpjava-bridge-jasperreports/
@@ -307,12 +313,14 @@ static function convertValue($value, $className) {
         return false;
     }
 
-    static function Jdate($dia, $mes, $ano) {
+    static function Jdate($dia, $mes, $ano) 
+    {
         $date = new Java("java.util.Date", abs($ano - 1900), abs($mes - 1), abs($dia));
         return $date;
     }
     
-    static function ArrayList ($ar_data){
+    static function ArrayList ($ar_data)
+    {
         $arrayList = new Java( 'java.util.ArrayList' );
         foreach( $ar_data as $value ) {
           $arrayList->add( $value );
