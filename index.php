@@ -18,8 +18,7 @@ include_once 'generate.php';
   and refactored by FraGoTe (fgonzalestello91@gmail.com)
  */
 
-if(count($_REQUEST)>0){
-    
+if (count($_REQUEST) > 0) {
     $query = "SELECT customer.first_name AS customer_first_name,
                                 customer.last_name AS customer_last_name,
                                 customer.email AS customer_email
