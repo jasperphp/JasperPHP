@@ -1,5 +1,4 @@
 <?php
-include_once 'generate.php';
 /*
   This file is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -17,9 +16,9 @@ include_once 'generate.php';
   tsuyu
   and refactored by FraGoTe (fgonzalestello91@gmail.com)
  */
+include_once 'generate.php';
 
-if(count($_REQUEST)>0){
-    
+if (!empty($_REQUEST) && count($_REQUEST) > 0) {
     $query = "SELECT customer.first_name AS customer_first_name,
                                 customer.last_name AS customer_last_name,
                                 customer.email AS customer_email
@@ -30,6 +29,7 @@ if(count($_REQUEST)>0){
 }
 
 ?>
+<!DOCTYPE html>
 <html>
 <head>
 <title>Jasper Report Example</title>
