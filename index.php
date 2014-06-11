@@ -23,8 +23,10 @@ if (!empty($_REQUEST) && count($_REQUEST) > 0) {
                                 customer.last_name AS customer_last_name,
                                 customer.email AS customer_email
                          FROM  customer customer";
-    
-    $obJrepor = new Jreport($query, 'customer.jrxml', array('title'=>'Customer'), 'report');
+    $params = array('title'=>'Customer');
+    $fileName = 'customer.jrxml';
+    $outputFileName = 'report';
+    $obJrepor = new Jreport($query, $fileName, $params, $outputFileName);
     $obJrepor->exportar($_REQUEST['format']);
 }
 
