@@ -18,6 +18,10 @@ How to configure JasperPHP
 8. Include path of the library in php (require_once("http://localhost:8080/JavaBridge/java/Java.inc")), make sure path is correct and tomcat server is running.
 9. run index.php
 
+FYI
+=======
+There is a bug when you use Tomcat 8.
+
 License
 =======
 This program is free software, under the GNU/GPLv3 license terms.
