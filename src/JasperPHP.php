@@ -16,10 +16,10 @@
   tsuyu
   and refactored by FraGoTe (fgonzalestello91@gmail.com)
  */
+namespace JasperPHP;
 
 require_once("http://localhost:8080/JavaBridge/java/Java.inc");
 
-namespace JasperPHP;
 
 class JasperPHP 
 {
