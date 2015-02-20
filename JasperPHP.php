@@ -19,7 +19,7 @@
 
 require_once("http://localhost:8080/JavaBridge/java/Java.inc");
 
-Namespace JasperPHP;
+namespace JasperPHP;
 
 class JasperPHP 
 {
