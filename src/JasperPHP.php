@@ -23,7 +23,6 @@ namespace JasperPHP;
 
 class JasperPHP 
 {
-
     var $query;
     var $jrxmlName;
     var $jasperPrint;
