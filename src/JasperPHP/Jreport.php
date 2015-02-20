@@ -21,7 +21,7 @@ namespace JasperPHP;
 require_once("http://localhost:8080/JavaBridge/java/Java.inc");
 
 
-class JasperPHP 
+class Jreport
 {
     var $query;
     var $jrxmlName;
