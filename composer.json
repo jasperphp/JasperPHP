@@ -1,0 +1,12 @@
+{
+    "name": "jasperphp/jasperphp",
+    "description": "This a PHP library based on JasperReports library that let you create reports with a graphical tool (We recommend to use iReport).",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Francis Gonzales",
+            "email": "fgonzalestello91@gmail.com"
+        }
+    ],
+    "require": {}
+}
