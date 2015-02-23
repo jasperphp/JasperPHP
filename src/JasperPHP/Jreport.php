@@ -27,6 +27,7 @@ class Jreport
     var $jasperPrint;
     var $filename;
     var $parametros;
+    var $adapter;
 
 	function setReport($query, $jrxmlName, $parameters, $filename = "report") 
 	{
@@ -49,9 +50,14 @@ class Jreport
 		$this->connect();
 	}
 	
+    function setAdapter(Adapter $adapter) 
+    {
+        $this->adapter = $adapter;
+    }
+
     function compileReporte() 
     {
-        $ruta = "reports/" . $this->jrxmlName;
+        $ruta = $this->adapter->getReportsPath() . $this->jrxmlName;
         $consulta = $this->query;
         try {
             $jasperxml = new \java("net.sf.jasperreports.engine.xml.JRXmlLoader");
@@ -330,6 +336,7 @@ class Jreport
     static function Jdate($dia, $mes, $ano) 
     {
         $date = new \java("java.util.Date", abs($ano - 1900), abs($mes - 1), abs($dia));
+        
         return $date;
     }
     
@@ -337,7 +344,7 @@ class Jreport
     {
         $arrayList = new \java( 'java.util.ArrayList' );
         foreach( $ar_data as $value ) {
-          $arrayList->add( $value );
+            $arrayList->add( $value );
         }
         
         return $arrayList;
