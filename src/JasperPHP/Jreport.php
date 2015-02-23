@@ -20,7 +20,6 @@ namespace JasperPHP;
 
 require_once("http://localhost:8080/JavaBridge/java/Java.inc");
 
-
 class Jreport
 {
     var $query;
@@ -29,8 +28,9 @@ class Jreport
     var $filename;
     var $parametros;
 
-    function __construct($query, $jrxmlName, $parameters, $filename = "report") {
-        if (!empty($query)) {
+	function setReport($query, $jrxmlName, $parameters, $filename = "report") 
+	{
+		if (!empty($query)) {
             $this->query = $query;
         }
         
@@ -46,9 +46,9 @@ class Jreport
             $this->parametros = $parameters;
         }
     
-   	$this->connect();
-    }
-
+		$this->connect();
+	}
+	
     function compileReporte() 
     {
         $ruta = "reports/" . $this->jrxmlName;
@@ -92,21 +92,23 @@ class Jreport
         $class = new \JavaClass("java.lang.Class");
         $class->forName("com.mysql.jdbc.Driver");
         $driverManager = new \JavaClass("java.sql.DriverManager");
+		
         try{
-        $conn = $driverManager->getConnection("jdbc:mysql://$host/$dbname?zeroDateTimeBehavior=convertToNull", $username, $password);
-        $jasperPrint = $fillManager->fillReport($report, $params, $conn);
+			$conn = $driverManager->getConnection("jdbc:mysql://$host/$dbname?zeroDateTimeBehavior=convertToNull", $username, $password);
+			$jasperPrint = $fillManager->fillReport($report, $params, $conn);
         } catch (\JavaException $ex) {
-                echo $ex->getCause();
+			echo $ex->getCause();
         }
         
         $this->jasperPrint = $jasperPrint;
     }
 
-    function exportar($typeoffile) 
+    function export($typeoffile) 
     {
         $jasperPrint = $this->jasperPrint;
         $exporter = new \java("net.sf.jasperreports.engine.JRExporter");
         set_time_limit(0);
+		
         switch ($typeoffile) {
             case 'xls':
                 $outputPath = tempnam(realpath("tmp"), $this->filename);  //generate unique temp file name    
@@ -120,7 +122,7 @@ class Jreport
                     $exporter->setParameter(\java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint);
                     $exporter->setParameter(\java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
                 } catch (\JavaException $ex) {
-                        echo $ex;
+                    echo $ex;
                 }
 
                 header("Content-type: application/vnd.ms-excel;");
@@ -137,7 +139,7 @@ class Jreport
                     $exporter->setParameter(\java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint);
                     $exporter->setParameter(\java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
                 } catch (\JavaException $ex) {
-                        echo $ex;
+                    echo $ex;
                 }
 
                 header("Content-type: application/csv");
@@ -151,7 +153,7 @@ class Jreport
                     $exporter->setParameter(\java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint);
                     $exporter->setParameter(\java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
                 } catch (\JavaException $ex) {
-                        echo $ex;
+                    echo $ex;
                 }
 
                 header("Content-type: application/vnd.ms-word");
@@ -166,18 +168,19 @@ class Jreport
                     $exporter->setParameter(\java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint);
                     $exporter->setParameter(\java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
                 } catch (\JavaException $ex) {
-                        echo $ex;
+                    echo $ex;
                 }
                 break;
             case 'pdf':
                 $outputPath = tempnam(realpath("tmp"), $this->filename);  //generate unique temp file name    
                 chmod($outputPath, 0766);
-                try {
-                $exporter = new \java("net.sf.jasperreports.engine.export.JRPdfExporter");
-                $exporter->setParameter(\java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint);
-                $exporter->setParameter(\java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
+                
+				try {
+					$exporter = new \java("net.sf.jasperreports.engine.export.JRPdfExporter");
+					$exporter->setParameter(\java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint);
+					$exporter->setParameter(\java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
                 } catch (\JavaException $ex) {
-                        echo $ex;
+                    echo $ex;
                 }
                 header("Content-type: application/pdf");
                 header("Content-Disposition: inline; filename={$this->filename}.pdf");
@@ -193,7 +196,7 @@ class Jreport
                     $exporter->setParameter(\java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint);
                     $exporter->setParameter(\java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
                 } catch (\JavaException $ex) {
-                        echo $ex;
+                    echo $ex;
                 }
 
                 header("Content-type: application/vnd.oasis.opendocument.spreadsheet");
@@ -207,7 +210,7 @@ class Jreport
                     $exporter->setParameter(\java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint);
                     $exporter->setParameter(\java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
                 } catch (\JavaException $ex) {
-                        echo $ex;
+                    echo $ex;
                 }
 
                 header("Content-type: application/vnd.oasis.opendocument.text");
@@ -223,7 +226,7 @@ class Jreport
                     $exporter->setParameter(\java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint);
                     $exporter->setParameter(\java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
                 } catch (\JavaException $ex) {
-                        echo $ex;
+                    echo $ex;
                 }
 
                 header("Content-type: text/plain");
@@ -231,12 +234,13 @@ class Jreport
             case 'rtf':
                 $outputPath = tempnam(realpath("tmp"), $this->filename);  //generate unique temp file name    
                 chmod($outputPath, 0766);
+
                 try {
                     $exporter = new \java("net.sf.jasperreports.engine.export.JRRtfExporter");
                     $exporter->setParameter(\java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint);
                     $exporter->setParameter(\java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
                 } catch (\JavaException $ex) {
-                        echo $ex;
+                    echo $ex;
                 }
 
                 header("Content-type: application/rtf");
@@ -250,7 +254,7 @@ class Jreport
                     $exporter->setParameter(\java("net.sf.jasperreports.engine.JRExporterParameter")->JASPER_PRINT, $jasperPrint);
                     $exporter->setParameter(\java("net.sf.jasperreports.engine.JRExporterParameter")->OUTPUT_FILE_NAME, $outputPath);
                 } catch (\JavaException $ex) {
-                        echo $ex;
+                    echo $ex;
                 }
 
                 header("Content-type: application/vnd.ms-powerpoint");
@@ -310,13 +314,10 @@ class Jreport
                 $temp = new \java('java.text.DateFormat');
                 $javaObject = $temp->parse($value);
                 return $javaObject;
-                //$format = new \java('java.text.SimpleDateFormat', "MM-dd-yyyy HH:mm:ss");
-                //$format->format(new \java('java.util.Date'));
             }
         } catch (Exception $err) {
             echo ( 'unable to convert value, ' . $value .
             ' could not be converted to ' . $className . ' ');
-            //' could not be converted to ' . $className . ' ' . $err); 
             return false;
         }
 
@@ -332,7 +333,7 @@ class Jreport
         return $date;
     }
     
-    static function ArrayList ($ar_data)
+    static function ArrayList($ar_data)
     {
         $arrayList = new \java( 'java.util.ArrayList' );
         foreach( $ar_data as $value ) {
